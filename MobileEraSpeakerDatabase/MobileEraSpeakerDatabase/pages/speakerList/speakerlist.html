@@ -1,8 +1,72 @@
-﻿<div>
-    <div>
-        Name: <input type="text" ng-model="name" />
+﻿<nav class="navbar navbar-default navbar-fixed-top navbar-collapse">
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <button type="button" class="btn btn-success navbar-btn navbar-left">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Sort by <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Newest</a></li>
+                        <li><a>Name</a></li>
+                        <li><a>Status</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </form>
+            <button type="button" class="btn btn-danger navbar-btn navbar-right sl-nav-signOutButton">Sign out</button>
+            <p class="navbar-text navbar-right">
+                Signed in as: <strong>{{user.username}}</strong>
+            </p>
+        </div>
     </div>
-    <div>
-        Hello {{name}}!
+</nav>
+
+<div class="container sl-container">
+    <div class="sl-speakerCard-and-buttos" ng-repeat="speaker in speakerList">
+        <div class="sl-speakerCard">
+            <div class="sl-profilePicture-container">
+                <img class="img-circle" ng-src="{{speaker.imageURL}}" />
+            </div>
+
+            <div class="sl-speakerInfo-container">
+                <div class="sl-speakerName">{{speaker.name}}</div>
+                <div class="sl-speakerTwitter">
+                    <a ng-href="http://twitter.com/{{speaker.twitter}}" target="_blank">
+                        @{{speaker.twitter}}
+                    </a>
+                </div>
+                <div class="sl-speakerEmail">{{speaker.email}}</div>
+                <div class="sl-speakerPhone">{{speaker.phone}}</div>
+            </div>
+
+            <div class="sl-speakerDesc-container">
+                <div class="sl-speakerDesc">{{speaker.desc}}</div>
+            </div>
+            <div class="sl-speakerFooter">
+                <div class="sl-footerText-1">Status:</div>
+                <div class="sl-footerText-2 confirmed">{{speaker.status}}</div>
+            </div>
+        </div>
+
+        <div class="sl-speakerButtons" ng-if="speaker.userID === user.userID || user.userType === 'admin'">
+            <div class="sl-speakerButton">
+                <button class="sl-editButton">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </div>
+            <div class="sl-speakerButton">
+                <button class="sl-deleteButton">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>

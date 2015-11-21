@@ -1,0 +1,111 @@
+﻿.sl-nav-signOutButton {
+    margin-left: 20px;
+}
+
+.sl-container {
+    margin-top: 71px;
+}
+
+.sl-speakerCard {
+    color: #4e4e4e;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    margin-bottom: 15px;
+    float: left;
+    width: 90%;
+}
+.sl-profilePicture-container {
+    width: 150px;
+    float: left;
+    overflow: auto;
+    margin-right: 20px;
+}
+.sl-profilePicture-container > img {
+    width: 150px;
+}
+
+.sl-speakerInfo-container {
+    float: left;
+    font-size: 18px;
+}
+
+.sl-speakerName {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.sl-speakerTwitter {
+    color: #4099ff;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sl-speakerEmail {
+    border-right: 1px solid #eaeaea;
+    display: inline;
+    float: left;
+    padding-right: 10px;
+}
+
+.sl-speakerPhone {
+    border-left: 1px solid #eaeaea;
+    padding-left: 10px;
+    display: inline;
+    float: left;
+}
+
+.sl-speakerDesc-container {
+    font-size: 18px;
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+}
+
+.sl-speakerButtons {
+    width: 10%;
+    float: left;
+}
+
+.sl-speakerButton > button {
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    width: 60px;
+    height: 60px;
+}
+
+.sl-editButton:hover {
+    color: #0026ff;
+}
+
+.sl-deleteButton:hover {
+    color: #ff0000;
+}
+
+.sl-statusText {
+    font-size: 15px;
+}
+
+.sl-speakerFooter {
+    font-size: 20px;
+    float: left;
+    width: 100%;
+    border-top: 3px solid #eaeaea;
+}
+
+.sl-footerText-1 {
+    float: left;
+}
+
+.sl-footerText-2 {
+    float: right;
+    font-weight: bold;
+}
+.sl-footerText-2.confirmed{
+    color: green;
+}
