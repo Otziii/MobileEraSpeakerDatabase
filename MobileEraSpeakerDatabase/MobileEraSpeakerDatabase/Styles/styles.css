@@ -7,6 +7,8 @@ a {
     cursor: pointer;
 }
 
+
+
 /* Login page */
 .li-container {
     color: #4e4e4e;
@@ -40,9 +42,11 @@ a {
     float: right;
 }
 
-
-
 /* SpeakerList page */
+.sl-dropdown:first-letter {
+    text-transform: uppercase;
+}
+
 .sl-nav-signOutButton {
     margin-left: 20px;
 }
@@ -56,9 +60,10 @@ a {
     padding: 10px;
     border-radius: 10px;
     background-color: #f8f8f8;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     float: left;
     width: 90%;
+    border: 3px solid #eaeaea;
 }
 .sl-profilePicture-container {
     width: 150px;
@@ -109,6 +114,7 @@ a {
     padding: 5px;
     background-color: #f3f3f3;
     border-radius: 10px;
+    border: 2px solid #eaeaea;
 }
 
 .sl-speakerButtons {
@@ -141,6 +147,7 @@ a {
     float: left;
     width: 100%;
     border-top: 3px solid #eaeaea;
+    padding-top: 5px;
 }
 
 .sl-footerText-1 {
@@ -153,4 +160,55 @@ a {
 }
 .sl-footerText-2.confirmed{
     color: green;
+}
+.sl-footerText-2.unknown{
+    color: black;
+}
+.sl-footerText-2.canceled{
+    color: red;
+}
+.sl-footerText-2.awaiting{
+    color: orange;
+}
+
+/* Modal */
+.mo-upload-container {
+    width: 150px;
+    margin-right: 30px;
+    float: left;
+}
+
+.mo-img {
+    margin-bottom: 5px;
+}
+
+.mo-img > img {
+    max-height: 105px;
+}
+
+.mo-name, .mo-email {
+    width: 350px;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.mo-twitter, .mo-phone {
+    width: 170px;
+    float: left;
+}
+
+.mo-twitter {
+    margin-right: 5px;
+}
+
+.mo-phone {
+    margin-left: 5px;
+}
+
+.mo-upload-button, .mo-remove-button {
+    margin-bottom: 10px;
+}
+
+.mo-desc {
+    resize: vertical;
 }

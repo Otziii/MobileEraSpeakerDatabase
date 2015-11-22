@@ -1,28 +1,32 @@
-﻿<nav class="navbar navbar-default navbar-fixed-top navbar-collapse">
-    <div class="container">
+﻿<nav class="navbar navbar-default navbar-fixed-top navbar-collapse sl-navbar-wrapper">
+    <div class="container sl-navbar-container">
         <div class="collapse navbar-collapse">
-            <button type="button" class="btn btn-success navbar-btn navbar-left">
+            <button type="button" class="btn btn-success navbar-btn navbar-left" ng-click="newSpeaker()" data-toggle="modal" data-target="#speakerModal">
                 <span class="glyphicon glyphicon-plus"></span>
                 <span> Add speaker</span>
             </button>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Sort by <span class="caret"></span>
+                    <a class="dropdown-toggle sl-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{orderProp}} <span class="caret"></span>
                     </a>
+
                     <ul class="dropdown-menu">
-                        <li><a>Newest</a></li>
-                        <li><a>Name</a></li>
-                        <li><a>Status</a></li>
+                        <li>
+                            <a ng-click="setOrder('name')">Name</a>
+                        </li>
+                        <li >
+                            <a ng-click="setOrder('status')">Status</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search for speaker" ng-model="search" />
+                    <input type="text" class="form-control" placeholder="Search for speaker" ng-model="query" />
                 </div>
             </form>
-            <button type="button" class="btn btn-danger navbar-btn navbar-right sl-nav-signOutButton">Sign out</button>
+            <button type="button" class="btn btn-danger navbar-btn navbar-right sl-nav-signOutButton" ng-click="signOut()">Sign out</button>
             <p class="navbar-text navbar-right">
                 Signed in as: <strong>{{user.username}}</strong>
             </p>
@@ -31,7 +35,7 @@
 </nav>
 
 <div class="container sl-container">
-    <div class="sl-speakerCard-and-buttos" ng-repeat="speaker in speakerList">
+    <div class="sl-speakerCard-and-buttos" ng-repeat="speaker in speakerList | filter:query | orderBy:orderProp">
         <div class="sl-speakerCard">
             <div class="sl-profilePicture-container">
                 <img class="img-circle" ng-src="{{speaker.imageURL}}" />
@@ -53,13 +57,18 @@
             </div>
             <div class="sl-speakerFooter">
                 <div class="sl-footerText-1">Status:</div>
-                <div class="sl-footerText-2 confirmed">{{speaker.status}}</div>
+                <div class="sl-footerText-2" ng-class="{
+                     unknown : speaker.status === 'unknown',
+                     confirmed : speaker.status === 'Confirmed',
+                     awaiting : speaker.status === 'Awaiting',
+                     canceled : speaker.status === 'Canceled'
+                     }">{{speaker.status}}</div>
             </div>
         </div>
 
         <div class="sl-speakerButtons" ng-if="speaker.userID === user.userID || user.userType === 'admin'">
             <div class="sl-speakerButton">
-                <button class="sl-editButton">
+                <button class="sl-editButton" ng-click="setModalValues(speaker.twitter)" data-toggle="modal" data-target="#speakerModal">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
             </div>
@@ -67,6 +76,66 @@
                 <button class="sl-deleteButton">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add new speaker modal -->
+<div class="modal fade" id="speakerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" flow-init>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Speaker information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mo-upload-container" flow-init="{target: '/upload'}"
+                     flow-files-submitted="upload($flow.files[0])">
+                    <div ng-if="modal.imageURL != '' && $flow.files.length <= 0">
+                        <div class="thumbnail mo-img">
+                            <img ng-src="{{modal.imageURL}}" />
+                        </div>
+                    </div>
+                    <div ng-if="modal.imageURL === '' || $flow.files.length > 0">
+                        <div class="thumbnail mo-img" ng-hide="$flow.files.length">
+                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                        </div>
+                        <div class="thumbnail mo-img" ng-show="$flow.files.length">
+                            <img flow-img="$flow.files[0]" />
+                        </div>
+                    </div>
+                    <span class="btn btn-success mo-upload-button" flow-btn ng-hide="$flow.files.length" flow-attrs="{accept:'image/*'}">
+                        Upload File
+                    </span>
+                    <a class="btn btn-danger mo-remove-button" ng-show="$flow.files.length" ng-click="$flow.cancel()">
+                        Remove
+                    </a>
+                   
+                </div>
+
+                <input type="text" class="form-control mo-name" placeholder="Name" ng-model="modal.name">
+                <input type="text" class="form-control mo-email" placeholder="Email" ng-model="modal.email">
+                <div class="input-group mo-twitter">
+                    <div class="input-group-addon">@</div>
+                    <input type="text" class="form-control" placeholder="Twitter" ng-model="modal.twitter">
+                </div>
+                <input type="text" class="form-control mo-phone" placeholder="Phone" ng-model="modal.phone">
+                <textarea class="form-control mo-desc" rows="7" placeholder="Description" ng-model="modal.desc"></textarea>
+                
+                <div class="form-group">
+                    <label for="exampleInputName2">Status</label>
+                    <select class="form-control mo-status" ng-model="modal.status">
+                        <option>Unknown</option>
+                        <option>Awaiting</option>
+                        <option>Confirmed</option>
+                        <option>Canceled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveSpeaker()">Save changes</button>
             </div>
         </div>
     </div>
