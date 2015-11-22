@@ -83,6 +83,8 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
+    <Content Include="pages\login\login.html" />
+    <Content Include="pages\login\loginCtrl.js" />
     <Content Include="pages\speakerList\speakerList.html" />
     <Content Include="pages\speakerList\speakerListCtrl.js" />
     <Content Include="Scripts\angular-animate.js" />
@@ -133,7 +135,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="pages\addSpeaker\" />
-    <Folder Include="pages\login\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

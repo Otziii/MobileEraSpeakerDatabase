@@ -3,6 +3,7 @@
         <div class="collapse navbar-collapse">
             <button type="button" class="btn btn-success navbar-btn navbar-left">
                 <span class="glyphicon glyphicon-plus"></span>
+                <span> Add speaker</span>
             </button>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
@@ -18,7 +19,7 @@
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search for speaker" ng-model="search" />
                 </div>
             </form>
             <button type="button" class="btn btn-danger navbar-btn navbar-right sl-nav-signOutButton">Sign out</button>
